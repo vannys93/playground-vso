@@ -1,10 +1,9 @@
-import React, { useState }  from 'react';
-
+import React, { useState } from 'react';
 
 export function App(props) {
 
-const [providedCurrentDate, setProvidedCurrentDate] = useState('');
-const [contractBeginDate, setContractBeginDate] = useState('');
+  const [providedCurrentDate, setProvidedCurrentDate] = useState('');
+  const [contractBeginDate, setContractBeginDate] = useState('');
   const [minimumContractDuration, setMinimumContractDuration] = useState('');
   const [noticePeriod, setNoticePeriod] = useState('');
   const [renewalInterval, setRenewalInterval] = useState('');
@@ -18,28 +17,27 @@ const [contractBeginDate, setContractBeginDate] = useState('');
     const renewal = parseInt(renewalInterval);
     var minEndDate = new Date(beginDate);
 
-function addMonths(date, months) {
-  var d = date.getDate();
-  date.setMonth(date.getMonth() + +months);
-  if (date.getDate() != d) {
-    date.setDate(0);
-  }
-  return date;
-}
+    function addMonths(date, months) {
+      var d = date.getDate();
+      date.setMonth(date.getMonth() + +months);
+      if (date.getDate() != d) {
+        date.setDate(1);
+      }
+      return date;
+    }
 
-      // add minDuration to minEndDate using addMonths function
-      addMonths(minEndDate, minDuration);
-      
+    // add minDuration to minEndDate using addMonths function
+    addMonths(minEndDate, minDuration);
 
-        if (!isNaN(minDuration) && !isNaN(notice) && !isNaN(renewal) && beginDate instanceof Date && !isNaN(beginDate.getTime())) {
+    if (!isNaN(minDuration) && !isNaN(notice) && !isNaN(renewal) && beginDate instanceof Date && !isNaN(beginDate.getTime())) {
 
-
-       const minCancellation = new Date(currentDate);
+      const minCancellation = new Date(currentDate);
       minCancellation.setDate(minCancellation.getDate() + notice * 7); // Convert weeks to days
 
       if (renewal === 0) {
         minEndDate.setDate(minEndDate.getDate() - 1);
-        const maxDate = minEndDate > minCancellation ? minEndDate : minCancellation;
+        //const maxDate = minEndDate > minCancellation ? minEndDate : minCancellation; 
+        const maxDate = new Date(Math.max(minEndDate, minCancellation));
         setNextCancellationDate(maxDate.toDateString());
       } else {
         while (minEndDate < minCancellation) {
@@ -75,6 +73,5 @@ function addMonths(date, months) {
       <br />
       <p>Next Possible Cancellation Date: {nextCancellationDate}</p>
     </div>
-  
   );
 }
