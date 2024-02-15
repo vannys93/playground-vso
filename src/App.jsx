@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 export function App(props) {
 
   const [providedCurrentDate, setProvidedCurrentDate] = useState('');
@@ -30,9 +29,7 @@ export function App(props) {
     // add minDuration to minEndDate using addMonths function
     addMonths(minEndDate, minDuration);
 
-
     if (!isNaN(minDuration) && !isNaN(notice) && !isNaN(renewal) && beginDate instanceof Date && !isNaN(beginDate.getTime())) {
-
 
       const minCancellation = new Date(currentDate);
       minCancellation.setDate(minCancellation.getDate() + notice * 7); // Convert weeks to days
@@ -76,6 +73,5 @@ export function App(props) {
       <br />
       <p>Next Possible Cancellation Date: {nextCancellationDate}</p>
     </div>
-
   );
 }
